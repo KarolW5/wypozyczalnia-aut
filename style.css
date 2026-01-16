@@ -1,47 +1,77 @@
-/* Styl dla sekcji opinii Google */
+/* =================================
+   ANIMACJA SEKCJI Z OPINIAMI
+   ================================= */
+
+/* Główna sekcja z opiniami */
 .google-reviews {
     margin-top: 50px;
-    padding-top: 30px;
+    padding: 40px 0;
     border-top: 1px solid #ddd;
+    position: relative;
     text-align: center;
 }
 
+/* Kontener "maska" - ukrywa to, co wychodzi poza niego */
 .reviews-container {
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
+    overflow: hidden; /* NAJWAŻNIEJSZE: Ukrywa obrazki poza kontenerem */
+    position: relative;
+    width: 100%;
 }
 
-.reviews-img {
-    max-width: 100%; /* Dopasuje się do szerokości białego okna */
+/* Efekt "zanikania" na krawędziach */
+.reviews-container::before,
+.reviews-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 15%; /* Szerokość zanikania */
+    height: 100%;
+    z-index: 2; /* Musi być nad obrazkami */
+}
+
+.reviews-container::before {
+    left: 0;
+    background: linear-gradient(to right, #fdfdfd 0%, rgba(253, 253, 253, 0) 100%);
+}
+
+.reviews-container::after {
+    right: 0;
+    background: linear-gradient(to left, #fdfdfd 0%, rgba(253, 253, 253, 0) 100%);
+}
+
+/* "Taśma" z obrazkami, która się przesuwa */
+.reviews-track {
+    display: flex; /* Ustawia obrazki w rzędzie */
+    /* WAŻNE: Musisz tu wpisać szerokość swojego obrazka opinia.png */
+    /* Zakładam, że ma on 960px. Jeśli ma inną, zmień tę wartość. */
+    width: calc(960px * 4); /* szerokość obrazka * ilość obrazków */
+    animation: scroll-reviews 30s linear infinite;
+}
+
+/* Zatrzymanie animacji po najechaniu myszką */
+.reviews-container:hover .reviews-track {
+    animation-play-state: paused;
+}
+
+/* Styl dla każdego obrazka w "taśmie" */
+.reviews-track img {
+    width: 960px; /* Musi być taka sama jak w calc() powyżej */
     height: auto;
+    padding: 0 20px; /* Odstęp między obrazkami */
+    box-sizing: content-box;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Delikatny cień */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     border: 1px solid #eee;
 }
 
-/* Styl dla nagłówków sekcji */
-.section-title {
-    text-align: center;
-    color: #0d1a2f;
-    margin-bottom: 30px;
-    font-size: 2rem;
-}
-
-/* Układ zalet (Szybki odbiór itp.) */
-.features-grid {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin: 40px 0;
-}
-
-.feature-item {
-    background: #fdfdfd;
-    padding: 20px;
-    border-radius: 8px;
-    width: 250px;
-    text-align: center;
-    border-bottom: 3px solid #0d1a2f;
+/* Definicja animacji przesuwania */
+@keyframes scroll-reviews {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Przesuwamy w lewo o połowę szerokości "taśmy" (czyli o 2 obrazki) */
+        transform: translateX(calc(-960px * 2));
+    }
 }
