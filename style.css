@@ -1,210 +1,139 @@
-/* --- RESET I OGÓLNE --- */
+/* --- GLOBALNE --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
-    /* TŁO STRONY */
-    background-image: url('tlo.jpg');
-    background-size: cover;       /* Rozciągnij na cały ekran */
-    background-position: center;  /* Wyśrodkuj */
-    background-attachment: fixed; /* Tło stoi w miejscu przy przewijaniu */
+    line-height: 1.6;
+    background-image: url('images/tlo.jpg');
     background-repeat: no-repeat;
-}
-
-/* Kontener główny - żeby treść była czytelna na tle */
-.main-container {
-    background-color: rgba(255, 255, 255, 0.95); /* Białe tło, lekko przeźroczyste */
-    max-width: 1200px;
-    margin: 0 auto; /* Wyśrodkowanie strony */
-    box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Cień rzucany przez stronę na tło */
-    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 header {
     background-color: #0d1a2f;
     color: white;
-    padding: 20px;
+    padding: 1.5rem 0;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-header nav a {
+nav a {
     color: white;
-    margin: 0 15px;
     text-decoration: none;
+    margin: 0 15px;
     font-weight: bold;
-    font-size: 1.1rem;
 }
 
-header nav a:hover {
-    color: #ffd700;
-}
+nav a:hover { color: #28a745; }
 
+/* --- KONTENER GŁÓWNY --- */
 main {
-    padding: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
-h1, h2, h3 {
-    color: #0d1a2f;
-}
-
-/* --- FLOTA (KARTY SAMOCHODÓW) --- */
-.premium-section {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
+/* --- STRONA GŁÓWNA: KARTY AUT --- */
 .fleet-gallery {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 25px;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .car-link {
     text-decoration: none;
-    color: inherit;
-    display: block;
-    width: 300px;
-    border: 1px solid #ddd;
+    color: white;
+    width: 260px;
+    background-color: #1a1a1a; /* Czarny nagłówek karty */
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    background: white;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.car-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
+.car-link:hover { transform: translateY(-10px); }
 
 .car-link img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
 }
 
 .car-link p {
-    font-size: 1.2rem;
     font-weight: bold;
     padding: 15px;
     margin: 0;
-    background: #f8f8f8;
-}
-
-/* --- INFO SEKCJA --- */
-.info-section {
     text-align: center;
-    padding: 40px 20px;
-    background: #f4f4f4;
-    border-radius: 10px;
-    margin: 20px 0;
+    background-color: #0d1a2f;
 }
 
-.features-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}
-
-.feature-item {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 250px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* --- SEKCJA OPINII (POPRAWIONA) --- */
-.google-reviews {
-    margin-top: 50px;
-    padding: 40px 0;
-    border-top: 1px solid #ddd;
-    position: relative;
-    text-align: center;
-    background: white;
-}
-
-.reviews-container {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    white-space: nowrap; /* Ważne, żeby obrazki były w linii */
-}
-
-/* Taśma z obrazkami */
-.reviews-track {
-    display: inline-block;
-    white-space: nowrap;
-    animation: scroll-reviews 20s linear infinite; /* Przyspieszyłem trochę */
-}
-
-/* Obrazek opinii */
-.reviews-track img {
-    height: 300px; /* Stała wysokość, szerokość dopasuje się sama */
-    width: auto;
-    display: inline-block;
-    margin: 0 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    vertical-align: middle;
-}
-
-/* Zatrzymanie po najechaniu */
-.reviews-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scroll-reviews {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Przesuwamy o 50% szerokości paska */
-}
-
-/* --- SZCZEGÓŁY AUTA --- */
+/* --- PODSTRONY: SZCZEGÓŁY --- */
 .details-wrapper {
     display: flex;
-    justify-content: center;
+    align-items: center;
     gap: 40px;
     flex-wrap: wrap;
-    align-items: center;
-    padding: 20px;
+    justify-content: center;
+}
+
+.image-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    animation: floating 3s ease-in-out infinite;
 }
 
 .image-container img {
-    max-width: 100%;
-    width: 500px;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.specs-container {
+    flex: 1;
+    min-width: 300px;
 }
 
 .specs-container ul {
     list-style: none;
     padding: 0;
-    font-size: 1.1rem;
-    line-height: 2;
+}
+
+.specs-container li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .details-btn {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background: #0d1a2f;
+    background-color: #28a745;
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
-.details-btn:hover {
-    background: #1a3a6e;
+/* --- ANIMACJA PŁYWANIA --- */
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
 
-/* --- STOPKA --- */
 footer {
     text-align: center;
-    padding: 20px;
-    background: #0d1a2f;
+    padding: 30px;
+    background-color: #0d1a2f;
     color: white;
-    margin-top: auto;
+    margin-top: 50px;
 }
